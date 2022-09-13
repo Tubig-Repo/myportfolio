@@ -1,6 +1,6 @@
 import { BsLinkedin, BsGithub } from "react-icons/bs";
-import logo from "../img/logo.png";
 import styled, { keyframes } from "styled-components";
+import logo from "./logo.png";
 import useIntroduction from "../customHooks/useIntroduction";
 import { useEffect } from "react";
 const HeaderComponent = styled.header`

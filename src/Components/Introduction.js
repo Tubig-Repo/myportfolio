@@ -25,7 +25,17 @@ const Introduction = () => {
     <Aboutme>
       <main style={WrapperStyle}>
         <h3>About me</h3>
-        <p style={{ padding: "1rem", letterSpacing: "1px" }}>{data.aboutMe}</p>
+        <p
+          style={{
+            padding: "1em",
+            letterSpacing: "0.5px",
+            textAlign: "justify",
+            textIndent: "2em",
+            lineHeight: "1.5",
+          }}
+        >
+          {data.aboutMe}
+        </p>
       </main>
     </Aboutme>
   );
