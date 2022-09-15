@@ -1,9 +1,11 @@
+import React, { useState } from "react";
+import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import useProjects from "../customHooks/useProjects";
 import { BsX } from "react-icons/bs";
-import React from "react";
-
+import Projects from "./routes/Projects";
+import Skills from "./routes/Skills";
+import Blog from "./routes/Blog";
 // Showcase Container
 const ShowcaseContainer = styled.div`
   width: 100%;
@@ -61,8 +63,6 @@ const Project = styled.div`
     box-shadow: 0px 2px 10px 0px rgba(194, 191, 191, 0.623);
   }
 `;
-
-const LinkDecoration = styled.a``;
 
 const ProjectImage = styled.img`
   width: 100%;
@@ -160,7 +160,7 @@ const Showcase = () => {
   const [modalState, setModal] = useState(false);
   const [modalID, setModalID] = useState(null);
   const tabs = ["Project", "Skills", "Blog"];
-  const [active, setActive] = useState(tabs[0]);
+  const [active, setActive] = useState(tabs[0].tabName);
   //Handling Modal
   const handleModal = (event) => {
     setModal(!modalState);
@@ -168,9 +168,10 @@ const Showcase = () => {
   };
   //Rendering Project Modal Details
   const RenderProjectDetails = ({ id }) => {
+    // 1. Searching for requested Project Details from the User
     const data = projects.find((res) => res.sys.id == id);
-    console.log(data);
     return (
+      // Generating the Modal Window
       <ProjectModal animate={modalState}>
         {/* Image Container */}
         <div style={{ margin: "0", padding: "0" }}>
@@ -219,44 +220,44 @@ const Showcase = () => {
     );
   };
 
-  // Rendering Projects from the contentful API
-  const renderProjects = () => {
-    if (isLoading) return <p>loading ..</p>;
-    return projects.map((project) => (
-      <Project onClick={handleModal}>
-        <ProjectImage
-          src={project.fields.showcase.fields.file.url}
-          data-id={project.sys.id}
-        />
-      </Project>
-    ));
-  };
-
-  // Handling
-  const handleShowcaseSection = (event) => {};
-
   return (
     <ShowcaseContainer>
       <WrapperStyle>
-        <ShowcaseLinkContainer>
-          {/* <ShowcaseLink onClick={handleShowcaseSection}>
-            <LinkDecoration href="#">Projects</LinkDecoration>
-          </ShowcaseLink>
-          <ShowcaseLink onClick={handleShowcaseSection}>
-            <LinkDecoration href="#">Skills</LinkDecoration>
-          </ShowcaseLink>
-          <ShowcaseLink onClick={handleShowcaseSection}>
-            <LinkDecoration href="#">Blog</LinkDecoration>
-          </ShowcaseLink> */}
-          {tabs.map((el) => (
-            <ShowcaseLink active={active === el} onClick={() => setActive(el)}>
-              {el}
-            </ShowcaseLink>
-          ))}
-        </ShowcaseLinkContainer>
-        <ProjectContainer>{renderProjects()}</ProjectContainer>
-        {modalState && <RenderProjectDetails id={modalID} />}
-        {modalState && <Overlay onClick={handleModal} />}
+        <BrowserRouter>
+          <ShowcaseLinkContainer>
+            {tabs.map((el) => (
+              <ShowcaseLink
+                key={el}
+                active={active === el}
+                onClick={() => setActive(el)}
+              >
+                <Link
+                  to={`/${el == "Project" ? "" : el}`}
+                  style={{ textDecoration: "none", color: "#ffff" }}
+                >
+                  {el}
+                </Link>
+              </ShowcaseLink>
+            ))}
+          </ShowcaseLinkContainer>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Projects
+                  projects={projects}
+                  isLoading={isLoading}
+                  modalState={modalState}
+                  handleModal={handleModal}
+                />
+              }
+            />
+            <Route path="/Skills" element={<Skills />} />
+            <Route path="/Blog" element={<Blog />} />
+          </Routes>
+          {modalState && <RenderProjectDetails id={modalID} />}
+          {modalState && <Overlay onClick={handleModal} />}
+        </BrowserRouter>
       </WrapperStyle>
     </ShowcaseContainer>
   );
