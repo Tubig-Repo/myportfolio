@@ -15,7 +15,6 @@ const SkillsItem = styled.li`
   justify-content: center;
   border-radius: 20px;
   border: 1px solid #b1b1b9;
-
   :hover {
     transform: scale(1.2);
     background-color: #202023;
@@ -24,13 +23,16 @@ const SkillsItem = styled.li`
 `;
 export default function Skills() {
   return (
-    <SkillsContainer>
-      <SkillsItem>HTML</SkillsItem>
-      <SkillsItem>CSS</SkillsItem>
-      <SkillsItem>Javascript</SkillsItem>
-      <SkillsItem>React</SkillsItem>
-      <SkillsItem>GIT</SkillsItem>
-      <SkillsItem>Figma</SkillsItem>
-    </SkillsContainer>
+    // Skills Container
+    <div className="mt-[2rem] w-[100%] grid  grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-[1rem]">
+      {/* Skills Item's */}
+      <li className="skills-item">HTML</li>
+      <li className="skills-item">CSS</li>
+      <li className="skills-item">Tailwind</li>
+      <li className="skills-item">Javascript</li>
+      <li className="skills-item">React</li>
+      <li className="skills-item">GIT</li>
+      <li className="skills-item">Figma</li>
+    </div>
   );
 }

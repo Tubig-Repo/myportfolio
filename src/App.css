@@ -1,3 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .FlexItemLink {
+    @apply flex grow-[2] items-center w-full h-auto;
+  }
+
+  .skills-item {
+    @apply list-none p-[3rem] flex justify-center border-[20px] border-[1px_solid_#b1b1b9] hover:scale-[1.2] bg-[#202023] transition-[0.5s] border-solid border-[#b1b1b9] border-[1px];
+  }
+}
 @import url("https://fonts.googleapis.com/css2?family=Asap&display=swap");
 
 * {

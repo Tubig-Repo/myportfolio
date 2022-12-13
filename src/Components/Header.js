@@ -109,51 +109,50 @@ function Header() {
 
   if (isLoading) return <p>Loading ...</p>;
   return (
-    <HeaderComponent>
-      <NavComponent>
-        <FlexItemLogo>
-          <img style={{ width: "20%", height: "auto" }} src={logo} />
-        </FlexItemLogo>
-        <FlexlinkContainer>
-          <FlextItemLink>
+    //  <Header className="max-h-full flex flex-col p-8">
+    <header className="max-h-full flex flex-col p-8">
+      <nav className="#fffff list-none flex justify-between mb-4 w-full">
+        <li className="flex grow-[2] items-center w-full h-auto">
+          <img className="w-3/12 h-auto" src={logo} />
+        </li>
+        <div className="grow flex w-1/2">
+          <li className="FlexItemLink justify-center cursor-pointer">
             <a
               href={data.linkedinLink}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <BsLinkedin style={iconStyle} />
+              <BsLinkedin className="text-[2rem]" />
             </a>
-          </FlextItemLink>
-          <FlextItemLink>
+          </li>
+          <li className="FlexItemLink justify-center cursor-pointer">
             <a href={data.githubLink} target="_blank" rel="noopener noreferrer">
-              <BsGithub style={iconStyle} />
+              <BsGithub className="text-[2rem]" />
             </a>
-          </FlextItemLink>
-        </FlexlinkContainer>
-      </NavComponent>
-      <HeaderMain>
-        <Introduction1>
-          <TypeWriter>
-            <p>{data.introductionMain}</p>
-          </TypeWriter>
-        </Introduction1>
-        <Introduction2>{data.occupations}</Introduction2>
-        <ViewResume>
+          </li>
+        </div>
+      </nav>
+      <main className="w-3/5 h-full my-0 mx-auto p-16 flex flex-col gap-5">
+        <div className="bg-[#b1b1b9] text-black rounded-[28px] p-4 flex justify-center items-center">
+          <div className="w-4/5">
+            <p className="animate-typing overflow-hidden border-r border-black whitespace-nowrap m-0-auto tracking-wider">
+              {data.introductionMain}
+            </p>
+          </div>
+        </div>
+        <div className="text-center mt-[20px]">{data.occupations}</div>
+        <li className="bg-[#2e8fff] rounded-[28px] cursor-pointer list-none p-4 text-center mt-[1rem] w-1/2 mx-auto hover:bg-[#2e8fffb9] [text-shadow:2px_2px_4px_#00000] ">
           <a
-            style={{
-              textAlign: "center",
-              textDecoration: "none",
-              color: "white",
-            }}
+            className="text-center no-underline	text-white"
             href={data.resumeLink}
             target="_blank"
             rel="noopener noreferrer"
           >
             View Resume
           </a>
-        </ViewResume>
-      </HeaderMain>
-    </HeaderComponent>
+        </li>
+      </main>
+    </header>
   );
 }
 
