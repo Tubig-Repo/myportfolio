@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter, Link, Routes, Route } from "react-router-dom";
-import styled from "styled-components";
+import { Link, Routes, Route, BrowserRouter } from "react-router-dom";
 import useProjects from "../customHooks/useProjects";
 import { BsX } from "react-icons/bs";
 import Projects from "./routes/Projects";
@@ -221,7 +220,7 @@ const Showcase = () => {
   return (
     <div className="w-[100%] relative">
       <main className="w-[50%] m-auto h-[100%] p-[2rem]">
-        <HashRouter>
+        <BrowserRouter>
           <ul className="list-none flex justify-between w-[50%] [>*]:text-[2rem]">
             {tabs.map((el) => (
               <li
@@ -265,7 +264,7 @@ const Showcase = () => {
               onClick={handleModal}
             />
           )}
-        </HashRouter>
+        </BrowserRouter>
       </main>
     </div>
   );
