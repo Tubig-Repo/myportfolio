@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Link, Routes, Route } from "react-router-dom";
+import { HashRouter, Link, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import useProjects from "../customHooks/useProjects";
 import { BsX } from "react-icons/bs";
@@ -221,7 +221,7 @@ const Showcase = () => {
   return (
     <div className="w-[100%] relative">
       <main className="w-[50%] m-auto h-[100%] p-[2rem]">
-        <BrowserRouter>
+        <HashRouter>
           <ul className="list-none flex justify-between w-[50%] [>*]:text-[2rem]">
             {tabs.map((el) => (
               <li
@@ -265,7 +265,7 @@ const Showcase = () => {
               onClick={handleModal}
             />
           )}
-        </BrowserRouter>
+        </HashRouter>
       </main>
     </div>
   );
