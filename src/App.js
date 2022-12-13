@@ -12,7 +12,7 @@ const AppContainer = styled.div`
 
 function App() {
   return (
-    <div className="max-w-[1000px] color-[#ffff] mx-auto">
+    <div className="max-w-[1000px] text-white mx-auto">
       <Header />
       <Introduction />
       <Showcase />
