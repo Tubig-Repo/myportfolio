@@ -95,7 +95,7 @@ const Showcase = () => {
           </ul>
           <Routes>
             <Route
-              path="/project"
+              path="/myportfolio/project"
               element={
                 <Projects
                   projects={projects}
@@ -105,8 +105,8 @@ const Showcase = () => {
                 />
               }
             />
-            <Route path="/Skills" element={<Skills />} />
-            <Route path="/Blog" element={<Blog />} />
+            <Route path="/myporftolio/Skills" element={<Skills />} />
+            <Route path="/myportfolio/Blog" element={<Blog />} />
           </Routes>
           {modalState && <RenderProjectDetails id={modalID} />}
           {modalState && (
