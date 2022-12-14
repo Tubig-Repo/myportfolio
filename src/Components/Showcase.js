@@ -95,7 +95,7 @@ const Showcase = () => {
           </ul>
           <Routes>
             <Route
-              path="/myportfolio/project"
+              path="/"
               element={
                 <Projects
                   projects={projects}
