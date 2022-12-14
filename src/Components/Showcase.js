@@ -5,6 +5,7 @@ import { BsX } from "react-icons/bs";
 import Projects from "./routes/Projects";
 import Skills from "./routes/Skills";
 import Blog from "./routes/Blog";
+
 const Showcase = () => {
   const [projects, isLoading] = useProjects();
   const [modalState, setModal] = useState(false);
