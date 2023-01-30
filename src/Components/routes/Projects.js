@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Oval } from "react-loader-spinner";
 // Project Elements
 const ProjectContainer = styled.div`
   width: 100%;
@@ -41,7 +41,23 @@ const ProjectImage = styled.img`
 const Projects = ({ projects, isLoading, handleModal }) => {
   // Rendering Projects from the contentful API
   const renderProjects = () => {
-    if (isLoading) return <p>loading ..</p>;
+    if (isLoading)
+      return (
+        <div className="flex justify-center">
+          <Oval
+            height={80}
+            width={80}
+            color="#2A71C3"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="#fff"
+            strokeWidth={2}
+            strokeWidthSecondary={2}
+          />
+        </div>
+      );
     return projects.map((project) => (
       <Project onClick={handleModal}>
         <ProjectImage

@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link, Routes, Route, BrowserRouter } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  Link,
+  Routes,
+  Route,
+  useLocation,
+  HashRouter as Router,
+} from "react-router-dom";
 import useProjects from "../customHooks/useProjects";
 import { BsX } from "react-icons/bs";
 import Projects from "./routes/Projects";
@@ -12,15 +18,13 @@ const Showcase = () => {
   const [modalID, setModalID] = useState(null);
   const tabs = ["Project", "Skills", "Blog"];
   const [active, setActive] = useState(tabs[0].tabName);
+  const currentTab = useLocation();
+  const stringCurrentTab = currentTab.pathname.replace("/", "");
   //Handling Modal
   const handleModal = (event) => {
     setModal(!modalState);
     setModalID(event.target.dataset.id);
   };
-
-  useEffect(() => {
-    console.log(tabs);
-  }, [active]);
 
   //Rendering Project Modal Details
   const RenderProjectDetails = ({ id }) => {
@@ -72,51 +76,49 @@ const Showcase = () => {
   return (
     <div className="w-[100%] relative">
       <main className="w-[50%] m-auto h-[100%] p-[2rem]">
-        <BrowserRouter>
-          <ul className="list-none flex justify-between w-[50%] [>*]:text-[2rem]">
-            {tabs.map((el) => (
-              <li
-                key={el}
-                active={active === el}
-                onClick={() => setActive(el)}
-                className={`cursor-pointer text-[#918c8c] ${
-                  active === el
-                    ? "border-b-[2px] border-solid border-b-[#2e8fffb9]"
-                    : ""
-                }`}
+        <ul className="list-none flex justify-between w-[50%] [>*]:text-[2rem]">
+          {tabs.map((el) => (
+            <li
+              key={el}
+              active={active === el}
+              onClick={() => setActive(el)}
+              className={`cursor-pointer text-[#918c8c] ${
+                active === el
+                  ? "border-b-[2px] border-solid border-b-[#2e8fffb9]"
+                  : ""
+              }`}
+            >
+              <Link
+                className="no-underline text-white"
+                to={`/${el == "Project" ? "" : el}`}
               >
-                <Link
-                  className="no-underline text-white"
-                  to={`/${el == "Project" ? "" : el}`}
-                >
-                  {el}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Projects
-                  projects={projects}
-                  isLoading={isLoading}
-                  modalState={modalState}
-                  handleModal={handleModal}
-                />
-              }
-            />
-            <Route path="/Skills" element={<Skills />} />
-            <Route path="/Blog" element={<Blog />} />
-          </Routes>
-          {modalState && <RenderProjectDetails id={modalID} />}
-          {modalState && (
-            <div
-              className="fixed w-[100%] h-[100%] inset-0 bg-[#181818] bg-opacity-[9%] backdrop-blur-[2px] z-[5]"
-              onClick={handleModal}
-            />
-          )}
-        </BrowserRouter>
+                {el}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Projects
+                projects={projects}
+                isLoading={isLoading}
+                modalState={modalState}
+                handleModal={handleModal}
+              />
+            }
+          />
+          <Route path="/Skills" element={<Skills />} />
+          <Route path="/Blog" element={<Blog />} />
+        </Routes>
+        {modalState && <RenderProjectDetails id={modalID} />}
+        {modalState && (
+          <div
+            className="fixed w-[100%] h-[100%] inset-0 bg-[#181818] bg-opacity-[9%] backdrop-blur-[2px] z-[5]"
+            onClick={handleModal}
+          />
+        )}
       </main>
     </div>
   );
